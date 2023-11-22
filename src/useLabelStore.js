@@ -1,4 +1,5 @@
-import { create } from 'zustand'
+import { createWithEqualityFn } from 'zustand/traditional';
+import { shallow } from 'zustand/shallow';
 
-export const useLabelStore = create(() => ({
-}))
+export const useLabelStore = createWithEqualityFn(() => ({
+}), shallow)
