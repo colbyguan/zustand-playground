@@ -4,9 +4,11 @@ import cn from 'classnames';
 
 export default function LabelDisplay({ label }) {
   const [flashTimeout, setFlashTimeout] = useState(undefined);
+
   const labelInfo = useLabelStore((state) => state[label])
 
   useEffect(() => {
+    console.log(label, '🚀🚀 rerendered', labelInfo)
     setFlashTimeout(prevTimeout => {
       if (prevTimeout) {
         clearTimeout(prevTimeout)
@@ -14,8 +16,9 @@ export default function LabelDisplay({ label }) {
 
       return window.setTimeout(() => {
         setFlashTimeout(undefined)
-      }, 700)
+      }, 1000)
     });
+    // Non exhaustive deps cuz "label" is just used in the console log
   }, [labelInfo])
 
 

@@ -12,12 +12,11 @@ function App() {
 
   const handleMainKeyDown = (e) => {
     if (e.key === "Enter") {
+      useLabelStore.setState({ [labelInput]: { num: Math.random() } })
+
       const newLabels = ([...labels, labelInput])
       setLabels(newLabels)
       setLabelInput("")
-
-      const entries = newLabels.map(key => ([key, { num: Math.random() }]))
-      useLabelStore.setState(Object.fromEntries(entries))
     }
   }
 
@@ -28,7 +27,7 @@ function App() {
 
   return (
     <div className="bg-white w-screen h-screen p-8 flex flex-col gap-16">
-      <div className="grid grid-cols-2">
+      <div className="flex gap-8">
         <div className="p-4 rounded-md border border-gray-200 flex flex-col gap-2 w-fit">
           <div className="form-control w-full max-w-xs">
             <label className="label">
@@ -58,7 +57,7 @@ function App() {
 
           <tbody>
             {labels.map(label => (
-              <LabelDisplay label={label} />
+              <LabelDisplay key={label} label={label} />
             ))}
           </tbody>
         </table>
